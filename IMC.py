@@ -15,9 +15,19 @@ def calcular_imc():
     imc = peso / (altura ** 2)
     label_resultado["text"] = f"IMC: {imc:.2f}"
 
+    if imc < 18.5:
+        categoria = "Abaixo do peso"
+    elif 18.5 <= imc < 25:
+        categoria = "Peso normal"
+    elif 25 <= imc < 30:
+        categoria = "Sobrepeso"
+    else:
+        categoria = "Obesidade"
+    label_categoria["text"] = f"Categoria: {categoria}"
+
 janela = tk.Tk()
 janela.title("Calculadora de IMC")
-janela.geometry("300x180")
+janela.geometry("300x250")
 janela.resizable(False, False)
 
 frame = tk.Frame(janela, padx=10, pady=10)
@@ -36,5 +46,8 @@ botao_calcular.grid(row=2, column=0, columnspan=2, pady=10)
 
 label_resultado = tk.Label(frame, text="IMC: ", font=("Arial", 12, "bold"))
 label_resultado.grid(row=3, column=0, columnspan=2, pady=5)
+
+label_categoria = tk.Label(frame, text="Categoria: ", font=("Arial", 12, "bold"))
+label_categoria.grid(row=4, column=0, columnspan=2, pady=5)
 
 janela.mainloop()
